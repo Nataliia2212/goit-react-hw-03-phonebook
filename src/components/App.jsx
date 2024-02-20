@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ContactsList from './ContactsList/ContactsList'
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
-import localStorage from 'helpers/localStorage';
+import {load, save} from 'helpers/localStorage';
 
 const CONTACTS = 'contacts';
 
@@ -13,7 +13,7 @@ export default class App extends Component {
   }
   
    componentDidMount () {
-    const contacts = localStorage.load(CONTACTS);
+    const contacts = load(CONTACTS);
     if(contacts) {
       this.setState({contacts})
     }
@@ -21,7 +21,7 @@ export default class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if(prevState.contacts.length !== this.state.contacts.length) {
-      localStorage.save(CONTACTS, this.state.contacts)
+      save(CONTACTS, this.state.contacts)
     }
   }
   
